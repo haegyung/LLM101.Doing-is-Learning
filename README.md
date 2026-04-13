@@ -13,6 +13,10 @@
 - 그래서 이 폴더를 그대로 열었을 때 어디까지가 Gemini 기준 정본인지 헷갈릴 수 있습니다.
 - 따라서 Gemini 사용자는 이 스타터팩을 자기 프로젝트 폴더로 `import`한 뒤에만 실행합니다.
 
+학습 문서 정본:
+- [Gemini CLI로 리서치부터 글쓰기까지](https://gyung.me/68nHrk)
+- 위 링크는 현재 `ol.vibeworkers.net`의 공유 문서로 연결됩니다.
+
 ## 0. 이 폴더 안에 무엇이 있나
 
 - `GEMINI.md`
@@ -581,11 +585,14 @@ claude --version
   - [Commands](https://code.claude.com/docs/en/commands)
   - [Skills](https://code.claude.com/docs/en/skills)
 
-워크숍 운영 문구를 다듬을 때 참고한 내부 문서:
-- [스킬로 리서치 부터 글쓰고, 다듬기 까지](https://ol.vibeworkers.net/doc/7iqk7yks66gcioumroyenoy5mcdrtodthlag6ria7jow6roglcdri6trk6zqulag6rmm7kea-PuNL1Yg61F)
-- [Gemini CLI](https://ol.vibeworkers.net/doc/gemini-cli-f1fusJo2rd)
+학습 문서 정본:
+- [Gemini CLI로 리서치부터 글쓰기까지](https://gyung.me/68nHrk)
 
-이 README는 위 문서들의 문구를 그대로 복사한 것이 아니라, 워크숍 시작용 폴더에 맞게 단계별 실행 가이드로 다시 정리한 버전입니다.
+검증 메모:
+- `https://gyung.me/68nHrk`는 현재 `https://ol.vibeworkers.net/s/8e5d2267-8bf2-4e3e-8f4f-6fa75cf04983`로 리다이렉트됩니다.
+- 해당 문서의 페이지 제목은 `Gemini CLI로 리서치부터 글쓰기까지`입니다.
+
+이 README는 위 학습 문서의 취지를 워크숍 시작용 폴더에 맞게 단계별 실행 가이드로 다시 정리한 버전입니다.
 
 추가 원칙:
 - 이 프로젝트는 `Gemini`와 `ChatGPT Codex`가 섞여 작업된 스타터팩이므로, Gemini 사용자는 원본 폴더를 직접 작업 공간으로 쓰지 않고 반드시 자기 프로젝트로 import해서 사용합니다.
