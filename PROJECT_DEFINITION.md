@@ -35,7 +35,7 @@
 ### 3. 작은 Skill + Command 중심
 
 - Lesson 1은 `리서치 -> 정리 -> 분석 -> 글쓰기 -> 다듬기` 흐름을 한 번 돌려보게 한다.
-- Lesson 2는 Lesson 1의 예제 Skill과 command를 자기 과제에 맞게 최소 수정하되, skill을 `agent capability`로 다시 읽어 보게 한다.
+- Lesson 2는 Lesson 1의 예제 Skill과 command를 자기 과제에 맞게 최소 수정하되, skill을 `agent capability`로 다시 읽고 command에 있던 orchestration 역할을 `orchestration-agent` skill로 올려 보게 한다.
 - 핵심은 새 구조를 과하게 늘리는 것이 아니라, 바로 실행 가능한 최소 버전을 남기는 것이다.
 
 ### 4. Prompt는 지식 + 맥락으로 가르친다
@@ -83,6 +83,7 @@
 - 필요하면 lesson 시작 전에 현재 git local 상태를 점검하고 기준선을 맞출 수 있다.
 - 최소 1개의 작업 산출물을 `outputs/`에 남길 수 있다.
 - 결과를 보고 `GEMINI.md`, `SKILL.md`, command 중 하나를 1회 이상 수정할 수 있다.
+- Lesson 2 수준에서는 command에 있던 orchestration 로직을 `SKILL.md`로 끌어올린 `orchestration-agent` 예시 1개를 남길 수 있다.
 - 필요하면 같은 workflow를 `Codex` 또는 `Claude Code` 구조로 옮길 수 있다.
 
 ## 현재 정본 기준

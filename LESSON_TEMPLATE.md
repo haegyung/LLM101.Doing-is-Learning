@@ -36,6 +36,7 @@ lessons/lesson-n-topic/
 - 사용자가 별도 과제를 지정하지 않으면 위 기본 연습 과제로 시작한다.
 - 프롬프트 설명이 필요하면 `상황 정보 + 선언적 지식 + 절차적 지식`을 구분하고, `출력 계약`은 선언적 지식의 닫기 단계로 적는다.
 - 현재 작업 폴더가 git repo 라면 lesson 시작 전에 local sync preflight를 먼저 안내한다.
+- 여러 작은 skill과 command를 조율하는 lesson이라면, 최종 산출물은 `오케스트레이션 에이전트를 skill로 구현한 예시`까지 닫는 것을 우선한다.
 - `Codex`와 `Claude Code` 안내가 필요하더라도, workflow와 outputs 설명은 기준 문서를 중심으로 유지한다.
 
 ## 4. 이 lesson 폴더에서 실제로 쓰는 파일
@@ -43,6 +44,7 @@ lessons/lesson-n-topic/
 - `README.md`
 - `GEMINI.md`
 - `.gemini/skills/[skill-name]/SKILL.md`
+- `.gemini/skills/orchestration-agent/SKILL.md` (필요한 lesson에 한함)
 - `.gemini/commands/[command-group]/[command].toml`
 - `outputs/`
 - `notes/`
@@ -51,6 +53,7 @@ lessons/lesson-n-topic/
 
 - 이 lesson의 핵심 흐름 1개를 적는다.
 - 학습자가 이번 lesson에서 남겨야 할 최소 산출물 1개를 적는다.
+- 흐름 조율이 핵심인 lesson이라면, 최소 산출물은 `orchestration-agent` skill 1개로 닫는다고 적는다.
 - 완벽한 결과보다 먼저 체감해야 할 성공 경험 1개를 적는다.
 
 ## 6. 시작하기 전에 고를 것
@@ -113,6 +116,7 @@ git pull --ff-only
 - workflow와 outputs는 그대로 두고 runtime 파일과 skill / command 구조만 옮긴다고 적는다.
 - `Codex`: `GEMINI.md` -> `AGENTS.md`
 - `Claude Code`: `GEMINI.md` -> `CLAUDE.md`
+- orchestration 로직이 길다면 command보다 skill에 넣고, command는 얇은 launcher/review wrapper 로 남긴다고 적는다.
 - native command가 없으면 같은 뜻의 plain prompt를 적는다.
 
 ### 7-6. 수정 요청

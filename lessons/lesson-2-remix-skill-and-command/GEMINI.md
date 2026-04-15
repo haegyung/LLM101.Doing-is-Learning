@@ -10,16 +10,19 @@
 # 현재 lesson의 목표
 - skill을 `재사용 가능한 agent capability`로 이해하게 돕는다.
 - Claude / Codex / Gemini / Agent Skills 관점에서 skill 구조를 비교하게 돕는다.
-- Lesson 1의 예제 Skill과 command를 자기 과제에 맞게 수정하는 최소 버전을 만든다.
-- Skill 1개와 command 1개를 수정하는 수준에서 닫는다.
+- Lesson 1의 예제 Skill과 command를 자기 과제에 맞게 수정하되, command에 있던 orchestration 역할을 `orchestration-agent` skill로 올리는 최소 버전을 만든다.
+- `orchestration-agent` Skill 1개와 얇은 command 1개를 수정하는 수준에서 닫는다.
 - 프롬프트에 `선언적 지식`, `절차적 지식`, `상황 정보`가 모두 필요하다는 점을 드러내게 돕는다.
 
 # 작업 원칙
 - 현재 작업 폴더가 git repo 라면 시작 전에 local sync 상태부터 점검한다.
 - 먼저 사용자의 실제 과제 또는 Lesson 1에서 막혔던 지점을 1문장으로 정리한다.
+- skill을 설명할 때는 `공식 최소 구조`와 `lesson용 8블록 teaching schema`를 분리해서 말한다.
+- 공식 최소 구조는 `SKILL.md`, metadata, trigger boundary, optional supporting files 기준으로 설명한다.
 - `remix-task`를 참고해 mismatch를 찾고 수정 방향을 제안한다.
+- 실제 구현 목표는 `.gemini/skills/orchestration-agent/SKILL.md` 수준의 orchestration skill 로 닫는다.
 - mismatch를 말할 때는 가능하면 `이 skill이 어떤 agent 역할을 수행하지 못하고 있는가`로 다시 설명한다.
-- command 초안과 Skill 초안은 길게 늘리지 말고 바로 테스트 가능한 최소 버전으로 만든다.
+- command 초안은 얇게 두고, 절차 지식과 orchestration 판단은 가능한 한 Skill 쪽에 둔다.
 - 수정 대상과 유지 대상을 분리해 설명한다.
 - `Claude`에서는 skill과 subagent가 공식적으로 분리된다는 점을 함께 설명한다.
 - 프롬프트를 설명할 때는 `상황 정보 + 선언적 지식 + 절차적 지식`으로 분해하고, 선언적 지식은 앞/뒤(`출력 계약`)로 나눌 수 있음을 함께 설명한다.
@@ -30,9 +33,9 @@
 - 추천 저장 경로:
   - `outputs/01_skill_as_agent_note.md`
   - `outputs/02_runtime_comparison.md`
-  - `outputs/03_skill_draft.md`
+  - `outputs/03_orchestration_skill.md`
   - `outputs/04_prompt_decomposition.md`
-  - `outputs/05_command_draft.md`
+  - `outputs/05_orchestration_command.md`
   - `outputs/06_test_prompt.md`
   - `outputs/07_revision_notes.md`
 

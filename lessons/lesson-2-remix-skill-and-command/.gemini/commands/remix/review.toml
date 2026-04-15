@@ -1,8 +1,8 @@
-description = "draft 된 Skill과 command를 검토하고 테스트 프롬프트를 만드는 command"
+description = "draft 된 orchestration-agent Skill과 command를 검토하고 테스트 프롬프트를 만드는 command"
 prompt = """
 대상 draft:
-@{outputs/03_skill_draft.md}
-@{outputs/05_command_draft.md}
+@{outputs/03_orchestration_skill.md}
+@{outputs/05_orchestration_command.md}
 
 수정 요청: {{args}}
 
@@ -10,10 +10,11 @@ remix-task를 참고해 아래를 수행하라.
 1. 강점 3개
 2. 과한 부분 3개
 3. agent 구조에서 빠진 부분 3개
-4. 프롬프트에 상황 정보 / 선언적 지식 / 절차적 지식이 모두 있는지, 선언적 지식이 결과 계약까지 잘 닫히는지 점검
-5. 바로 실행 가능한 축약안
-6. 테스트 프롬프트 3개
-7. 저장 권장:
+4. orchestration 판단이 command보다 Skill에 충분히 들어갔는지 점검
+5. 프롬프트에 상황 정보 / 선언적 지식 / 절차적 지식이 모두 있는지, 선언적 지식이 결과 계약까지 잘 닫히는지 점검
+6. 바로 실행 가능한 축약안
+7. 테스트 프롬프트 3개
+8. 저장 권장:
    - outputs/06_test_prompt.md
    - outputs/07_revision_notes.md
 

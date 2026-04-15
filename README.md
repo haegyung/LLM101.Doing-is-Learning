@@ -32,7 +32,7 @@
 핵심 원칙:
 - 기준은 `실제 작업 1개를 끝까지 굴리는 workflow` 입니다.
 - lesson 1은 기준 문서의 `GEMINI.md 작성 -> SKILL 5개 -> custom command 2개 -> 첫 실행 -> revise loop`를 lesson 자산으로 정리한 버전입니다.
-- lesson 2는 같은 흐름을 자기 과제에 맞게 최소 수정하되, skill을 `agent capability`로 읽는 extension 입니다.
+- lesson 2는 같은 흐름을 자기 과제에 맞게 최소 수정하되, skill을 `agent capability`로 읽고 command에 있던 orchestration 역할을 `orchestration-agent` skill로 올리는 extension 입니다.
 - lesson 2 이후의 코스 공통 기준은 `프롬프트에 상황 정보 + 선언적 지식 + 절차적 지식이 모두 있어야 한다`는 점을 명시하는 것입니다.
 - lesson 실행 전 현재 작업 폴더가 git repo 라면 `local sync`부터 점검하는 것을 기본 preflight로 둡니다.
 - `Gemini CLI`, `Codex`, `Claude Code`를 별도 커리큘럼으로 나누지 않고, 같은 workflow와 산출물 구조를 유지한 채 필요한 차이만 따로 안내합니다.
@@ -67,7 +67,7 @@
 
 ### Lesson 2
 
-- 목적: Lesson 1 예제를 버리지 않고 자기 과제에 맞게 최소 수정하되, skill을 `재사용 가능한 agent capability`로 이해합니다.
+- 목적: Lesson 1 예제를 버리지 않고 자기 과제에 맞게 최소 수정하되, skill을 `재사용 가능한 agent capability`로 이해하고 최종적으로 `orchestration-agent` skill 1개로 닫습니다.
 - 추가 기준: 프롬프트를 `상황 정보 + 선언적 지식 + 절차적 지식`으로 분해해 보고, 시작 전에 git local sync를 먼저 점검합니다.
 - 기준 근거:
   - 기준 문서의 `9) 결과 수정 루프`
