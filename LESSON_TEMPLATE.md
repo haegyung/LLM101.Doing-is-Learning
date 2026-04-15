@@ -22,16 +22,19 @@ lessons/lesson-n-topic/
 - 한 줄 목표: `[이 lesson에서 끝까지 돌려볼 작업 1문장]`
 - 대상 작업: `[과제 / 발표 / 보고서 / 프로젝트 / 실습]`
 
-## 3. 정본 문서와 기본 예제 교재
+## 3. 기준 학습 문서와 기본 연습 과제
 
-학습 문서 정본:
-- `[문서 제목](https://example.com)`
+기준 학습 문서:
+- `[문서 제목](https://example.com 또는 상대경로)`
 
-기본 예제 교재:
-- `[사용자가 교재를 지정하지 않았을 때 기본으로 쓰는 텍스트 또는 링크]`
+기본 연습 과제:
+- `[사용자가 자기 과제를 아직 정하지 않았을 때 바로 시작해 볼 작업 1문장]`
 
 원칙:
-- 사용자가 별도 교재를 지정하지 않으면 위 자료를 기준 텍스트로 사용한다.
+- 기준 문서는 `실행 순서`, `체크`, `수정 loop`를 설명하는 문서 1개로 고정한다.
+- lesson 본문은 기준 문서의 어느 단계들을 lesson 형태로 옮긴 것인지 적는다.
+- 사용자가 별도 과제를 지정하지 않으면 위 기본 연습 과제로 시작한다.
+- `Codex`와 `Claude Code` 안내가 필요하더라도, workflow와 outputs 설명은 기준 문서를 중심으로 유지한다.
 
 ## 4. 이 lesson 폴더에서 실제로 쓰는 파일
 
@@ -58,77 +61,70 @@ lessons/lesson-n-topic/
 - `[비권장 예시 1]`
 - `[비권장 예시 2]`
 
-## 7. Gemini에서 실행하기
+## 7. 실행하기
 
-### 7-1. 시작 command
+### 7-1. 공통 시작 요청
 
 ```text
-/[command] "[lesson 시작 예시]"
+[이 lesson workflow를 사용해서 "[실제 작업 1개]"를 시작해줘.]
 ```
 
-### 7-2. 기본 예제 교재 command
+### 7-2. 기본 연습 과제 요청
 
 ```text
-/[command] "[기본 예제 교재를 이용한 시작 예시]"
+[이 lesson workflow를 사용해서 "[기본 연습 과제]"를 시작해줘.]
 ```
 
 ### 7-3. 추천 산출물
 
-- `outputs/01_[name].md`
-- `outputs/02_[name].md`
-- `outputs/03_[name].md`
+- `outputs/[name].md`
+- `outputs/[name].md`
+- `outputs/[name].md`
 
-### 7-4. 수정 command
+### 7-4. Gemini CLI
+
+- `.gemini`를 그대로 사용한다.
+- 필요하면 `/memory reload`, `/skills reload`, `/commands reload`를 안내한다.
+- native command가 있으면 아래처럼 예시를 적는다.
 
 ```text
-/[command] "[수정 예시]"
+/[command] "[실제 작업 1개]"
 ```
 
-## 8. 다른 LLM 환경으로 옮길 때
+### 7-5. Codex / Claude Code가 필요할 때만
 
-공통 원칙:
-- 공통 흐름은 현재 lesson 폴더의 `README.md`를 기준으로 본다.
-- runtime 규칙은 현재 lesson 폴더의 `GEMINI.md`에서 가져간다.
-- skill / command는 각 환경의 기본 skill creator로 다시 만든다.
+- workflow와 outputs는 그대로 두고 runtime 파일과 skill / command 구조만 옮긴다고 적는다.
+- `Codex`: `GEMINI.md` -> `AGENTS.md`
+- `Claude Code`: `GEMINI.md` -> `CLAUDE.md`
+- native command가 없으면 같은 뜻의 plain prompt를 적는다.
 
-### 8-1. Codex 예시 요청
+### 7-6. 수정 요청
 
 ```text
-$skill-creator
-이 lesson 폴더의 README.md, GEMINI.md, .gemini/skills/*, .gemini/commands/*를 읽고
-Codex용 lesson skill을 만들어줘.
-산출물은 outputs/를 유지하고, lesson 목표와 예시는 현재 lesson 폴더 README.md를 기준으로 맞춰줘.
+[이 lesson workflow를 사용해서 "[수정 예시]"를 다듬어줘.]
 ```
 
-### 8-2. Claude 예시 요청
+## 8. 추천 실습 시나리오
+
+### 시나리오 0. 기본 연습 과제
 
 ```text
-이 lesson 폴더의 README.md, GEMINI.md, .gemini/skills/*, .gemini/commands/*를 읽고
-Claude Code용 skill과 custom command 구조로 옮겨줘.
-공통 규칙은 CLAUDE.md로, lesson 목표와 예시는 현재 lesson 폴더 README.md를 기준으로 맞춰줘.
-```
-
-## 9. 추천 실습 시나리오
-
-### 시나리오 0. 기본 예제 교재
-
-```text
-/[command] "[기본 예제 교재로 시작하는 예시]"
+[이 lesson workflow를 사용해서 "[기본 연습 과제]"를 시작해줘.]
 ```
 
 ### 시나리오 A
 
 ```text
-/[command] "[시나리오 A]"
+[이 lesson workflow를 사용해서 "[시나리오 A]"를 시작해줘.]
 ```
 
 ### 시나리오 B
 
 ```text
-/[command] "[시나리오 B]"
+[이 lesson workflow를 사용해서 "[시나리오 B]"를 시작해줘.]
 ```
 
-## 10. 막힐 때 쓰는 문장
+## 9. 막힐 때 쓰는 문장
 
 ### 시작이 막힐 때
 
@@ -151,7 +147,7 @@ Claude Code용 skill과 custom command 구조로 옮겨줘.
 [문장 2]
 ```
 
-## 11. 합본 갱신 규칙
+## 10. 합본 갱신 규칙
 
 lesson 문서를 수정한 뒤에는 course root에서 아래를 실행합니다.
 

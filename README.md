@@ -1,16 +1,119 @@
 # LLM101.Learn-is-Doing
 
-이 폴더는 `LLM101.Learn-is-Doing` 튜토리얼 시리즈의 정본(course root)입니다.  
-이제부터는 이 코스를 레슨 폴더 단위로 분리해서 관리합니다.
+이 폴더는 `LLM101.Learn-is-Doing` 튜토리얼 시리즈의 tools 정본(course root)입니다.  
+시리즈 이름은 `LLM101.Learn-is-Doing`이고, 현재 tools workspace의 실제 경로는 `LLM101.tools.Learn-is-doing/`입니다.  
+기준 문서인 학생 실습용 Gemini CLI 튜토리얼을 lesson 단위 실행 자산으로 다시 정리해 둔 workspace입니다.
 
-현재 포함된 레슨:
+현재 포함된 lesson:
 - [Lesson 1. 스킬을 활용해서 리서치부터 글쓰기까지](./lessons/lesson-1-research-writing/README.md)
-- [Lesson 2. 예제 스킬과 command를 내 과제에 맞게 고쳐 쓰기](./lessons/lesson-2-remix-skill-and-command/README.md)
+- [Lesson 2. Skill을 에이전트처럼 이해하고 내 과제에 맞게 remix하기](./lessons/lesson-2-remix-skill-and-command/README.md)
 
 프로젝트 정의:
 - [PROJECT_DEFINITION.md](./PROJECT_DEFINITION.md)
 
-## 0. 구조
+기준 학습 문서:
+- [학생 실습용: Gemini CLI 작업 워크플로](../LLM101.docs.Learn-is-doing/canonical/markdown/tutorial-gemini-cli-student-workflow.md)
+
+교재/심화 문서:
+- [Gemini CLI 실습 교재 (MD 구조화 버전)](../LLM101.docs.Learn-is-doing/canonical/markdown/tutorial-gemini-cli-textbook.md)
+- [학생 Task 중심 Gemini CLI 튜토리얼 (긴 버전)](../LLM101.docs.Learn-is-doing/canonical/markdown/tutorial-gemini-cli-structured.md)
+
+공유 공식 가이드 허브:
+- [knol/agent-skills/skill-as-agent-shared-guide.md](./knol/agent-skills/skill-as-agent-shared-guide.md)
+- [knol/agent-skills/official-source-map.md](./knol/agent-skills/official-source-map.md)
+
+## 0. 이 코스의 목적
+
+이 코스는 위 기준 문서의 학생 실습 흐름을 재사용 가능한 lesson 형태로 옮긴 것입니다.
+
+핵심 원칙:
+- 기준은 `실제 작업 1개를 끝까지 굴리는 workflow` 입니다.
+- lesson 1은 기준 문서의 `GEMINI.md 작성 -> SKILL 5개 -> custom command 2개 -> 첫 실행 -> revise loop`를 lesson 자산으로 정리한 버전입니다.
+- lesson 2는 같은 흐름을 자기 과제에 맞게 최소 수정하되, skill을 `agent capability`로 읽는 extension 입니다.
+- `Gemini CLI`, `Codex`, `Claude Code`를 별도 커리큘럼으로 나누지 않고, 같은 workflow와 산출물 구조를 유지한 채 필요한 차이만 따로 안내합니다.
+- runtime별 skill 구조 차이는 `./knol/agent-skills/`의 공유 요약을 기준으로 통일합니다.
+
+## 1. 가장 짧은 시작 순서
+
+1. 기준 학습 문서 [`tutorial-gemini-cli-student-workflow.md`](../LLM101.docs.Learn-is-doing/canonical/markdown/tutorial-gemini-cli-student-workflow.md) 를 한 번 읽습니다.
+2. 이번 주에 실제로 해야 하는 작업 1개를 문장으로 적습니다.
+3. `lessons/lesson-1-research-writing/` 폴더를 현재 작업 환경으로 import 합니다.
+4. `GEMINI.md`, `.gemini/`, `outputs/`를 현재 환경 규약에 맞게 불러옵니다.
+5. `start` 단계에 해당하는 요청 1회를 실행합니다.
+6. `outputs/`에 결과를 남깁니다.
+7. 결과를 보고 `revise` 또는 `remix` 단계로 한 번 더 수정합니다.
+
+권장 진행 순서:
+- `lessons/lesson-1-research-writing/`
+- `lessons/lesson-2-remix-skill-and-command/`
+
+## 2. lesson 맵
+
+### Lesson 1
+
+- 목적: 학생의 실제 과제, 발표, 보고서, 학습 작업을 `리서치 -> 정리 -> 분석 -> 글쓰기 -> 다듬기` 순서로 한 번 끝까지 돌립니다.
+- 기준 근거:
+  - 기준 문서의 `5) GEMINI.md 작성`
+  - `6) Task용 작은 SKILL 제작`
+  - `7) 오케스트레이션용 custom command 2개 만들기`
+  - `8) 실제 작업에 적용`
+  - `9) 결과 수정 루프`
+
+### Lesson 2
+
+- 목적: Lesson 1 예제를 버리지 않고 자기 과제에 맞게 최소 수정하되, skill을 `재사용 가능한 agent capability`로 이해합니다.
+- 기준 근거:
+  - 기준 문서의 `9) 결과 수정 루프`
+  - `10) 다음에 다시 쓸 때 기본 실행 패턴`
+  - `12) 체크리스트`
+- 공유 해설 근거:
+  - `./knol/agent-skills/skill-as-agent-shared-guide.md`
+  - `./knol/agent-skills/official-source-map.md`
+
+## 3. 기준 실행 흐름
+
+### 3-1. Gemini CLI
+
+기준 문서에 직접 나온 기본 흐름을 그대로 씁니다.
+
+- 준비물:
+  - macOS 또는 Linux 터미널
+  - Node.js 20+
+  - 인터넷 연결
+  - 개인 Google 계정 또는 Gemini API Key
+  - 실제 작업 1개
+- 설치 / 인증:
+  - `npm install -g @google/gemini-cli`
+  - `brew install gemini-cli`
+  - 또는 `npx @google/gemini-cli`
+- 확인:
+  - `gemini --version`
+  - `gemini`
+  - `/about`
+- lesson 자산을 가져온 뒤 필요하면 아래를 다시 읽습니다.
+
+```text
+/memory reload
+/skills reload
+/commands reload
+```
+
+### 3-2. Codex / Claude Code
+
+기준 문서에는 Gemini CLI 단계가 상세히 적혀 있고, 이 코스에서는 같은 workflow를 다른 환경으로 옮길 때 필요한 차이만 적습니다.
+
+공통 원칙:
+- 실제 작업 1개를 적는 방식은 같습니다.
+- 산출물 구조는 같은 뜻을 유지합니다.
+- `GEMINI.md`의 규칙을 각 환경의 runtime 파일로 옮깁니다.
+- `.gemini` 자산은 각 환경의 skill / command 구조로 다시 만듭니다.
+
+필요할 때만 별도 안내:
+- `Codex`: `GEMINI.md` -> `AGENTS.md`
+- `Claude Code`: `GEMINI.md` -> `CLAUDE.md`
+- native command가 없으면 lesson `README.md`의 시작 / 수정 요청을 plain prompt로 실행합니다.
+
+## 4. 구조와 SoT
 
 이 코스의 정본 경로는 아래처럼 나눕니다.
 - course 공통 안내 SoT: `README.md`
@@ -22,6 +125,8 @@
 - lesson 1 runtime 규칙 SoT: `lessons/lesson-1-research-writing/GEMINI.md`
 - lesson 2 본문 SoT: `lessons/lesson-2-remix-skill-and-command/README.md`
 - lesson 2 runtime 규칙 SoT: `lessons/lesson-2-remix-skill-and-command/GEMINI.md`
+- 기준 학습 문서 SoT: `../LLM101.docs.Learn-is-doing/canonical/markdown/tutorial-gemini-cli-student-workflow.md`
+- shared agent-skills guide SoT: `knol/agent-skills/skill-as-agent-shared-guide.md`
 
 현재 폴더 구조:
 
@@ -48,229 +153,7 @@ LLM101.Learn-is-Doing/
         └── notes/
 ```
 
-## 1. 어떻게 쓰나
-
-기본 원칙은 단순합니다.
-- course 공통 안내는 이 `README.md`를 봅니다.
-- 프로젝트 한 줄 정의와 범위는 `PROJECT_DEFINITION.md`를 봅니다.
-- 실제 실습은 각 lesson 폴더의 `README.md`를 봅니다.
-- Gemini runtime 규칙은 각 lesson 폴더의 `GEMINI.md`를 봅니다.
-- lesson 업데이트가 끝나면 `COMBINED.md`를 다시 만듭니다.
-
-## 2. 가장 짧은 시작 순서
-
-1. Git 설치
-2. 이 저장소를 받기
-3. 사용할 lesson 폴더를 하나 고르기
-4. 그 lesson 폴더를 자기 LLM 작업 폴더로 import 하기
-5. lesson 폴더의 `README.md`를 열고 예제 command 1개 실행하기
-6. `outputs/`에 결과 저장하기
-7. lesson 문서가 바뀌면 마지막에 `COMBINED.md` 갱신하기
-
-권장 진행 순서:
-- `lessons/lesson-1-research-writing/`
-- `lessons/lesson-2-remix-skill-and-command/`
-
-## 3. Git 설치
-
-이 저장소를 받거나 복제하려면 먼저 Git이 있어야 합니다.
-
-### Windows
-
-1. 공식 설치 페이지를 엽니다.
-   - [Git for Windows](https://git-scm.com/install/windows)
-2. 설치 파일을 내려받아 기본 옵션으로 설치합니다.
-3. `PowerShell` 또는 `Git Bash`를 열고 아래를 실행합니다.
-
-```bash
-git --version
-```
-
-### macOS
-
-Homebrew가 있으면:
-
-```bash
-brew install git
-git --version
-```
-
-Homebrew가 없다면:
-
-```bash
-xcode-select --install
-git --version
-```
-
-공식 안내:
-- [Git for macOS](https://git-scm.com/install/mac)
-
-### Linux
-
-Ubuntu / Debian:
-
-```bash
-sudo apt update
-sudo apt install git
-git --version
-```
-
-Fedora:
-
-```bash
-sudo dnf install git
-git --version
-```
-
-Arch Linux:
-
-```bash
-sudo pacman -S git
-git --version
-```
-
-공식 안내:
-- [Git for Linux](https://git-scm.com/install/linux)
-
-## 4. lesson 폴더 받기
-
-배포 방식은 보통 두 가지입니다.
-
-### 방법 A. 저장소로 받기
-
-```bash
-git clone <repo-url>
-cd <repo-name>/LLM101.Learn-is-Doing
-```
-
-### 방법 B. 압축 파일로 받기
-
-1. 압축을 풉니다.
-2. 터미널을 열어 `LLM101.Learn-is-Doing` 폴더로 이동합니다.
-
-```bash
-cd /path/to/LLM101.Learn-is-Doing
-```
-
-## 5. Gemini CLI에서는 lesson 폴더를 import 후 실행하기
-
-이 코스는 `Gemini`와 `ChatGPT Codex`가 섞여 정리된 스타터팩입니다.  
-그래서 Gemini 사용자는 course root 전체를 직접 작업 폴더로 쓰지 말고, 필요한 lesson 폴더를 자기 프로젝트로 import한 뒤 실행합니다.
-
-### 5-1. Gemini CLI 설치
-
-공식 문서:
-- [Gemini CLI 문서](https://google-gemini.github.io/gemini-cli/)
-- [CLI Commands](https://google-gemini.github.io/gemini-cli/docs/cli/commands.html)
-
-Homebrew:
-
-```bash
-brew install gemini-cli
-```
-
-npm:
-
-```bash
-npm install -g @google/gemini-cli
-```
-
-설치 확인:
-
-```bash
-gemini --version
-```
-
-### 5-2. import 대상
-
-원칙적으로는 필요한 lesson 폴더 하나만 import 합니다.
-
-처음 시작할 때:
-
-```text
-LLM101.Learn-is-Doing/lessons/lesson-1-research-writing/
-```
-
-Lesson 1을 끝낸 뒤 예제 skill/command를 자기 과제에 맞게 바꿔보려면:
-
-```text
-LLM101.Learn-is-Doing/lessons/lesson-2-remix-skill-and-command/
-```
-
-필수 복사 대상:
-- `README.md`
-- `GEMINI.md`
-- `.gemini/`
-
-같이 가져가면 좋은 폴더:
-- `outputs/`
-- `notes/`
-
-### 5-3. macOS / Linux 예시
-
-```bash
-LESSON_DIR=/path/to/LLM101.Learn-is-Doing/lessons/lesson-1-research-writing
-
-mkdir -p ~/my-gemini-project
-cp "$LESSON_DIR/README.md" ~/my-gemini-project/
-cp "$LESSON_DIR/GEMINI.md" ~/my-gemini-project/
-cp -R "$LESSON_DIR/.gemini" ~/my-gemini-project/
-cp -R "$LESSON_DIR/outputs" ~/my-gemini-project/
-cp -R "$LESSON_DIR/notes" ~/my-gemini-project/
-cd ~/my-gemini-project
-gemini
-```
-
-Gemini 안에서는 아래를 다시 읽습니다.
-
-```text
-/memory reload
-/skills reload
-/commands reload
-```
-
-그 다음 lesson 폴더의 `README.md`에 있는 예제 command를 실행합니다.
-
-### 5-4. Windows PowerShell 예시
-
-```powershell
-$LessonDir = ".\\LLM101.Learn-is-Doing\\lessons\\lesson-1-research-writing"
-
-New-Item -ItemType Directory -Force -Path .\my-gemini-project | Out-Null
-Copy-Item "$LessonDir\\README.md" .\my-gemini-project\
-Copy-Item "$LessonDir\\GEMINI.md" .\my-gemini-project\
-Copy-Item "$LessonDir\\.gemini" .\my-gemini-project\ -Recurse
-Copy-Item "$LessonDir\\outputs" .\my-gemini-project\ -Recurse
-Copy-Item "$LessonDir\\notes" .\my-gemini-project\ -Recurse
-Set-Location .\my-gemini-project
-gemini
-```
-
-## 6. Codex와 Claude Code로 옮길 때
-
-공통 원칙:
-- 공통 흐름은 lesson 폴더 `README.md`를 기준으로 본다.
-- Gemini runtime 규칙은 lesson 폴더 `GEMINI.md`를 기준으로 본다.
-- `.gemini` 자산은 각 환경의 기본 skill creator로 재구성한다.
-
-### Codex
-
-공식 문서:
-- [AGENTS.md 가이드](https://developers.openai.com/codex/guides/agents-md)
-- [Codex Skills](https://developers.openai.com/codex/skills)
-
-Codex에서는 lesson 폴더의 `GEMINI.md`를 `AGENTS.md`로 옮기고, lesson 폴더의 `README.md`를 작업 지침으로 같이 둡니다.
-
-### Claude Code
-
-공식 문서:
-- [Memory](https://code.claude.com/docs/en/memory)
-- [Commands](https://code.claude.com/docs/en/commands)
-- [Skills](https://code.claude.com/docs/en/skills)
-
-Claude Code에서는 lesson 폴더의 `GEMINI.md`를 `CLAUDE.md`로 옮기고, lesson 폴더 `README.md`를 레슨 실행 가이드로 같이 둡니다.
-
-## 7. 합본 정책
+## 5. 합본 정책
 
 이 코스는 업데이트가 끝날 때마다 합본을 같이 관리합니다.
 
@@ -285,13 +168,9 @@ Claude Code에서는 lesson 폴더의 `GEMINI.md`를 `CLAUDE.md`로 옮기고, l
 bash scripts/build_combined.sh
 ```
 
-합본에는 아래가 들어갑니다.
-- course 공통 안내 `README.md`
-- 각 lesson 폴더의 `README.md`
+## 6. Quality Gate 실행
 
-## 8. Quality Gate 실행
-
-문서/lesson 자산을 수정한 뒤에는 아래 게이트를 실행합니다.
+문서 / lesson 자산을 수정한 뒤에는 아래 게이트를 실행합니다.
 
 ```bash
 bash scripts/run_quality_gate.sh
@@ -300,26 +179,3 @@ bash scripts/run_quality_gate.sh
 해석 기준:
 - `PASS`(exit code 0): Must 완료 조건 충족
 - `FAIL`(exit code 1): 미완료. 로그에 나온 실패 항목부터 수정 후 재실행
-
-게이트 내부 순서:
-1. `COMBINED.md` freshness 검사(필요 시 재생성)
-2. `COMBINED.md` 결정성 검사(연속 재생성 해시 동일)
-3. `scripts/*.sh` 문법 검사
-4. `scripts/validate_course.sh` 구조/정합성 검사
-
-## 9. 검증한 로컬 실행 예시
-
-이 저장소를 정리하면서 아래 실행 파일 존재는 확인했습니다.
-
-```bash
-git --version
-gemini --version
-codex --version
-claude --version
-```
-
-확인된 예시 버전:
-- `git 2.53.0`
-- `gemini 0.37.1`
-- `codex-cli 0.120.0`
-- `claude 2.1.92`

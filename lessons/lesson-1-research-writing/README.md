@@ -1,6 +1,7 @@
 # Lesson 1. 스킬을 활용해서 리서치부터 글쓰기까지
 
-이 문서는 `LLM101.Learn-is-Doing/lessons/lesson-1-research-writing/` 폴더의 정본 lesson guide 입니다.  
+이 문서는 `LLM101.tools.Learn-is-doing/lessons/lesson-1-research-writing/` 폴더의 정본 lesson guide 입니다.  
+시리즈 이름은 `LLM101.Learn-is-Doing`이지만, 현재 lesson 자산의 실제 경로는 위 tools workspace 기준입니다.  
 course 공통 안내는 상위 폴더의 `../../README.md`를 보고, 현재 lesson 실행은 이 파일을 기준으로 진행합니다.
 
 ## 1. 이 lesson의 목표
@@ -9,25 +10,36 @@ course 공통 안내는 상위 폴더의 `../../README.md`를 보고, 현재 les
 - 작은 Skill과 command를 써서 `리서치 -> 정리 -> 분석 -> 글쓰기 -> 다듬기` 흐름을 한 번 끝까지 돌려보는 것
 
 핵심은 세 가지입니다.
-- 주제가 아니라 이번 주에 실제로 해야 하는 작업을 고릅니다.
+- 입력은 외부 글 읽기가 아니라 `이번 주에 실제로 해야 하는 작업 1개`입니다.
 - 완벽한 결과보다 작은 성공 경험을 먼저 만듭니다.
 - 예제 Skill과 command를 그대로 한 번 실행한 뒤, 자기 작업에 맞게 고칩니다.
 
-## 2. 학습 문서 정본과 기본 예제 교재
+## 2. 기준 학습 문서와 기본 연습 과제
 
-학습 문서 정본:
-- [Gemini CLI로 리서치부터 글쓰기까지](https://gyung.me/68nHrk)
+기준 학습 문서:
+- [학생 실습용: Gemini CLI 작업 워크플로](../../../LLM101.docs.Learn-is-doing/canonical/markdown/tutorial-gemini-cli-student-workflow.md)
 
-기본 원칙:
-- 이 튜토리얼 시리즈에서 기본적으로 사용할 예제 교재는 위 문서입니다.
-- 사용자가 별도 교재를 지정하지 않으면 `https://gyung.me/68nHrk`를 기준 텍스트로 사용합니다.
+이 lesson이 옮긴 기준 단계:
+- `5) GEMINI.md 작성`
+- `6) Task용 작은 SKILL 제작 (5개)`
+- `7) 오케스트레이션용 custom command 2개 만들기`
+- `8) 실제 작업에 적용`
+- `9) 결과 수정 루프`
+
+기본 연습 과제:
+- `AI 윤리 수업 발표를 위해 최근 생성형 AI의 저작권 논쟁 사례를 조사하고, 5분 발표용 개요와 초안을 만들기`
+
+원칙:
+- 사용자가 별도 과제를 지정하지 않으면 위 기본 연습 과제로 시작합니다.
+- lesson의 목표와 출력 형식은 기준 학습 문서의 학생 workflow를 그대로 따릅니다.
+- `Codex`와 `Claude Code` 안내가 필요하더라도, 같은 workflow와 outputs를 유지한 채 필요한 차이만 따로 적습니다.
 
 ## 3. 이 lesson 폴더에서 실제로 쓰는 파일
 
 - `README.md`
   - 현재 lesson 실행 가이드
 - `GEMINI.md`
-  - Gemini runtime 규칙
+  - lesson runtime 규칙 정본
 - `.gemini/skills/research-task/SKILL.md`
   - 리서치 시작용 예시 Skill
 - `.gemini/skills/organize-task/SKILL.md`
@@ -52,8 +64,8 @@ course 공통 안내는 상위 폴더의 `../../README.md`를 보고, 현재 les
 좋은 시작 과제 예시:
 - 발표 자료 조사해서 초안 만들기
 - 비교 보고서 구조 잡기
-- 자기소개서 문장 다듬기
-- 특정 논문 2~3개 비교 정리하기
+- 사회심리학 과제 초안 쓰기
+- 팀플 발표용 5분 스크립트 초안 만들기
 
 처음에는 피하는 것이 좋은 과제:
 - 너무 넓은 주제 하나 전체 공부하기
@@ -67,128 +79,137 @@ course 공통 안내는 상위 폴더의 `../../README.md`를 보고, 현재 les
 - 초안은 완벽할 필요가 없습니다. 대신 근거가 달린 문장으로 끝까지 써보는 것이 먼저입니다.
 - 작은 Skill은 큰 이론서가 아니라, 하나의 Task를 덜 막히게 하는 작은 도우미입니다.
 
-## 5. Lesson 1을 Gemini에서 실행하기
+## 5. Lesson 1 실행하기
 
-### 5-1. 예제 command 실행
+세 환경 공통 원칙:
+- 실제 작업 1개를 먼저 적습니다.
+- 사용자가 별도 과제를 주지 않았다면 기본 연습 과제를 그대로 씁니다.
+- 산출물 의미는 `research -> outline -> analysis -> draft -> revision` 순서를 유지합니다.
 
-이번 주 실제 작업 1개를 넣어 실행합니다.
+### 5-1. 공통 시작 요청
+
+환경과 상관없이 아래 뜻으로 시작하면 됩니다.
 
 ```text
-/taskflow:start "예시: AI가 대학 글쓰기 과제에 미치는 영향 비교 보고서 초안 만들기"
+이 lesson-1 research-writing workflow를 사용해서
+"예시: AI 윤리 수업 발표를 위해 최근 생성형 AI의 저작권 논쟁 사례를 조사하고, 5분 발표용 개요와 초안을 만들기"
+작업을 시작해줘.
+가능하면 outputs/research.md부터 제안해줘.
 ```
 
-별도 교재를 정하지 않았다면, 기본 예제 교재로 먼저 시작합니다.
-
-```text
-/taskflow:start "기본 예제 교재 https://gyung.me/68nHrk 를 읽고 핵심 주장 5개, 전체 구조, 수업 적용 아이디어를 정리한 5문단 초안을 만들어줘"
-```
-
-이 command는 보통 아래 흐름으로 안내합니다.
+이 요청은 보통 아래 흐름으로 이어집니다.
 - `research-task` 기준으로 질문과 검색 키워드를 잡기
 - `organize-task` 기준으로 자료를 구조화하기
 - `analysis-task` 기준으로 주장과 근거를 연결하기
-- `writing-task` 기준으로 5문단 초안을 만들기
+- `writing-task` 기준으로 초안을 만들기
 
-### 5-2. 추천 산출물
+### 5-2. Gemini CLI
 
-가능하면 아래 파일로 저장하면서 진행합니다.
-- `outputs/01_research_plan.md`
-- `outputs/02_outline.md`
-- `outputs/03_argument_map.md`
-- `outputs/04_draft.md`
-
-### 5-3. 초안 다듬기
-
-초안을 만든 뒤 아래를 실행합니다.
+`.gemini`를 그대로 사용하고 아래 command를 실행합니다.
 
 ```text
-/taskflow:revise "예시: 문장을 더 간결하게 바꾸고, 근거가 약한 문단을 표시해줘"
+/taskflow:start "AI 윤리 수업 발표를 위해 최근 생성형 AI의 저작권 논쟁 사례를 조사하고, 5분 발표용 개요와 초안을 만들기"
 ```
 
-수정 결과는 보통 아래 파일로 정리하면 됩니다.
-- `outputs/05_polished_draft.md`
+필요하면 아래를 다시 읽습니다.
 
-## 6. 다른 LLM 환경으로 옮길 때
+```text
+/memory reload
+/skills reload
+/commands reload
+```
+
+### 5-3. Codex / Claude Code가 필요할 때만
 
 공통 원칙:
-- 공통 흐름은 현재 lesson 폴더의 `README.md`를 기준으로 봅니다.
-- Gemini runtime 규칙은 현재 lesson 폴더의 `GEMINI.md`에서 가져갑니다.
-- `.gemini` 자산은 각 환경의 기본 skill creator로 다시 만듭니다.
+- 같은 workflow와 outputs를 유지합니다.
+- `GEMINI.md` 규칙을 현재 환경 runtime 파일로 옮깁니다.
+- native command가 없으면 같은 뜻의 plain prompt를 사용합니다.
 
-### 6-1. Codex 예시 요청
+`Codex`
+- `GEMINI.md` -> `AGENTS.md`
+- `.gemini/skills/*`, `.gemini/commands/*`를 Codex 구조로 옮깁니다.
 
 ```text
 $skill-creator
 이 lesson 폴더의 README.md, GEMINI.md, .gemini/skills/*, .gemini/commands/*를 읽고
-Codex용 lesson-1 research-writing skill을 만들어줘.
-산출물은 outputs/를 유지하고, 레슨 목표와 예시는 이 폴더의 README.md를 기준으로 맞춰줘.
+Codex용 lesson-1 research-writing skill과 command 구조를 만들어줘.
+산출물 의미는 research -> outline -> analysis -> draft -> revision 순서를 유지해줘.
 ```
 
-실행 예시:
-
-```text
-이 프로젝트의 lesson-1 research-writing workflow를 사용해서
-"기본 예제 교재 https://gyung.me/68nHrk 를 읽고 핵심 주장 5개와 5문단 초안 만들기"
-작업을 시작해줘.
-먼저 outputs/01_research_plan.md부터 제안해줘.
-```
-
-### 6-2. Claude Code 예시 요청
+`Claude Code`
+- `GEMINI.md` -> `CLAUDE.md`
+- `.gemini/skills/*`, `.gemini/commands/*`를 Claude Code 구조로 옮깁니다.
 
 ```text
 이 lesson 폴더의 README.md, GEMINI.md, .gemini/skills/*, .gemini/commands/*를 읽고
 Claude Code용 Lesson 1 skill과 custom command 구조로 옮겨줘.
-공통 규칙은 CLAUDE.md로, 레슨 목표와 예시는 현재 lesson 폴더 README.md를 기준으로 맞춰줘.
-산출물은 outputs/에 저장하게 해줘.
+산출물 의미는 research -> outline -> analysis -> draft -> revision 순서를 유지해줘.
 ```
 
-실행 예시:
+### 5-4. 추천 산출물
+
+가능하면 아래 파일로 저장하면서 진행합니다.
+- `outputs/research.md`
+- `outputs/outline.md`
+- `outputs/analysis.md`
+- `outputs/draft.md`
+
+### 5-5. 초안 다듬기
+
+초안을 만든 뒤에는 세 환경 모두 아래 뜻으로 다듬으면 됩니다.
 
 ```text
-이 프로젝트의 lesson-1 research-writing workflow를 사용해서
-"기본 예제 교재 https://gyung.me/68nHrk 를 읽고 핵심 주장 5개와 5문단 초안 만들기"
-작업을 시작해줘.
-먼저 리서치 질문 3개와 검색 키워드 10개부터 제안해줘.
+이 lesson-1 revise workflow를 사용해서
+"문장을 더 짧고 명확하게. 근거 없는 부분은 확인 필요로 표시. 발표용으로 읽기 쉽게."
+작업을 진행해줘.
 ```
 
-## 7. Lesson 1을 처음 실행할 때 가장 안전한 순서
+`Gemini CLI`에서는 아래 command를 그대로 실행할 수 있습니다.
+
+```text
+/taskflow:revise "문장을 더 짧고 명확하게. 근거 없는 부분은 확인 필요로 표시. 발표용으로 읽기 쉽게."
+```
+
+수정 결과는 보통 아래 파일로 정리하면 됩니다.
+- `outputs/revision.md`
+
+## 6. Lesson 1을 처음 실행할 때 가장 안전한 순서
 
 1. 이번 주 실제 과제 1개 고르기
-2. 교재를 따로 정하지 않았다면 기본 예제 교재 `https://gyung.me/68nHrk`로 시작하기
-3. `Gemini CLI`에서 `start` command 1회 실행하기
-4. `outputs/01~04` 중 가능한 만큼 저장하기
+2. 현재 환경에서 lesson 자산을 한 번 불러오기
+3. `start` 단계에 해당하는 시작 요청을 1회 실행하기
+4. `outputs/research.md`부터 `outputs/draft.md`까지 가능한 만큼 저장하기
 5. `revise` 단계까지 1회 돌려보기
-6. 그 다음 자기 작업에 맞게 Skill 또는 command를 고치기
-7. 필요하면 Codex 또는 Claude Code로 같은 흐름을 옮기기
+6. 결과를 보고 `GEMINI.md` 또는 해당 Skill 1개를 작은 수정으로 고치기
 
-## 8. 추천 실습 시나리오
+## 7. 추천 실습 시나리오
 
-### 시나리오 0. 기본 예제 교재로 시작
-
-```text
-/taskflow:start "기본 예제 교재 https://gyung.me/68nHrk 를 읽고, 핵심 개념 요약 -> 구조 정리 -> 내 과제 적용 아이디어 -> 5문단 초안 순서로 진행해줘"
-```
-
-### 시나리오 A. 발표 준비
+### 시나리오 0. 기본 연습 과제
 
 ```text
-/taskflow:start "AI 윤리와 대학 수업 변화 발표 자료 초안 만들기"
+이 lesson-1 research-writing workflow를 사용해서
+"AI 윤리 수업 발표를 위해 최근 생성형 AI의 저작권 논쟁 사례를 조사하고, 5분 발표용 개요와 초안을 만들기"
+작업을 시작해줘.
 ```
 
-### 시나리오 B. 비교 보고서
+### 시나리오 A. 사회심리학 과제 초안
 
 ```text
-/taskflow:start "생성형 AI 찬반 논거 비교 보고서 초안 만들기"
+이 lesson-1 research-writing workflow를 사용해서
+"사회심리학 과제 초안을 쓰기 위해 관련 논문 3편 비교표와 5문단 초안을 만들기"
+작업을 시작해줘.
 ```
 
-### 시나리오 C. 자기소개서 문장 개선
+### 시나리오 B. 팀플 발표 스크립트
 
 ```text
-/taskflow:start "자기소개서 1번 문항 구조 잡고 초안 만들기"
-/taskflow:revise "문장을 더 자연스럽게 바꾸고 과장된 표현은 줄여줘"
+이 lesson-1 research-writing workflow를 사용해서
+"팀플 발표용 5분 스크립트 초안을 만들기"
+작업을 시작해줘.
 ```
 
-## 9. 막힐 때 쓰는 문장
+## 8. 막힐 때 쓰는 문장
 
 ### 리서치가 막힐 때
 
@@ -214,7 +235,7 @@ Claude Code용 Lesson 1 skill과 custom command 구조로 옮겨줘.
 ### 초안이 막힐 때
 
 ```text
-완벽한 글 말고 끝까지 갈 수 있는 5문단 초안으로 먼저 써줘.
+완벽한 글 말고 끝까지 갈 수 있는 초안으로 먼저 써줘.
 근거가 약한 문장은 표시해줘.
 ```
 
